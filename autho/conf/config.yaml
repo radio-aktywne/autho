@@ -1,0 +1,57 @@
+serve:
+  api:
+    port: ${AUTHO_PORT:-20000}
+
+errors:
+  fallback:
+    - json
+  handlers:
+    json:
+      enabled: true
+      config:
+        verbose: true
+    redirect:
+      enabled: true
+      config:
+        to: ${AUTHO_WEBAUTH_PUBLIC_URL:-http://localhost:22000}/login
+        return_to_query_param: return_to
+        when:
+          - error:
+              - unauthorized
+              - forbidden
+            request:
+              header:
+                accept:
+                  - text/html
+
+access_rules:
+  repositories:
+    - file://./conf/access-rules.yaml
+
+authenticators:
+  bearer_token:
+    enabled: true
+    config:
+      check_session_url: ${AUTHO_AUTHE_URL:-http://localhost:21000}/sessions/whoami
+      preserve_path: true
+      extra_from: "@this"
+      subject_from: "identity.id"
+      token_from:
+        header: Authorization
+  cookie_session:
+    enabled: true
+    config:
+      check_session_url: ${AUTHO_AUTHE_URL:-http://localhost:21000}/sessions/whoami
+      preserve_path: true
+      extra_from: "@this"
+      subject_from: "identity.id"
+      only:
+        - ory_kratos_session
+
+authorizers:
+  allow:
+    enabled: true
+
+mutators:
+  noop:
+    enabled: true
