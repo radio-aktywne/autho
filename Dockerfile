@@ -16,7 +16,7 @@ USER ory
 
 ENV AUTHO_PORT=20000 \
     AUTHO_AUTHE_URL=http://localhost:21000 \
-    AUTHO_WEBAUTH_PUBLIC_URL=http://localhost:22000
+    AUTHO_WEBAUTH_PUBLIC_URL=http://localhost:23000
 
 EXPOSE 20000
 
