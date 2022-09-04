@@ -14,11 +14,11 @@ COPY ./autho/conf/ ./conf/
 RUN chown -R ory /app/* /app/conf/*
 USER ory
 
-ENV AUTHO_PORT=20000 \
-    AUTHO_AUTHE_URL=http://localhost:21000 \
-    AUTHO_WEBAUTH_PUBLIC_URL=http://localhost:23000
+ENV AUTHO_PORT=24000 \
+    AUTHO_AUTHE_URL=http://localhost:23000 \
+    AUTHO_WEBAUTH_PUBLIC_URL=http://localhost:21000
 
-EXPOSE 20000
+EXPOSE 24000
 
 ENTRYPOINT ["./start.sh"]
 CMD []
