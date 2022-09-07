@@ -13,7 +13,7 @@ errors:
     redirect:
       enabled: true
       config:
-        to: ${AUTHO_WEBAUTH_PUBLIC_URL:-http://localhost:21000}/login
+        to: ${AUTHO_AUTHGATE_PUBLIC_URL:-http://localhost:20000}/ui/login
         return_to_query_param: return_to
         when:
           - error:
