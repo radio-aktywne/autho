@@ -1,6 +1,11 @@
 serve:
   api:
     port: ${AUTHO_PORT:-24000}
+    tls:
+      cert:
+        path: /etc/certs/cert.pem
+      key:
+        path: /etc/certs/key.pem
 
 errors:
   fallback:
@@ -13,7 +18,7 @@ errors:
     redirect:
       enabled: true
       config:
-        to: ${AUTHO_AUTHGATE_PUBLIC_URL:-http://localhost:20000}/ui/login
+        to: ${AUTHO_AUTHGATE_PUBLIC_URL:-https://localhost:20000}/ui/login
         return_to_query_param: return_to
         when:
           - error:
@@ -32,7 +37,7 @@ authenticators:
   bearer_token:
     enabled: true
     config:
-      check_session_url: ${AUTHO_AUTHE_URL:-http://localhost:23000}/sessions/whoami
+      check_session_url: ${AUTHO_AUTHE_URL:-https://localhost:23000}/sessions/whoami
       preserve_path: true
       extra_from: "@this"
       subject_from: "identity.id"
@@ -41,7 +46,7 @@ authenticators:
   cookie_session:
     enabled: true
     config:
-      check_session_url: ${AUTHO_AUTHE_URL:-http://localhost:23000}/sessions/whoami
+      check_session_url: ${AUTHO_AUTHE_URL:-https://localhost:23000}/sessions/whoami
       preserve_path: true
       extra_from: "@this"
       subject_from: "identity.id"
